@@ -197,7 +197,7 @@ export default function BrandStockReport() {
             </div>
 
             <p className="text-center text-[#9ca3af] text-sm mt-6">
-              💛💜 Grace x GSS
+              Made by Grace, for Adam 💛💜
             </p>
           </>
         )}
