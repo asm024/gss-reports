@@ -46,7 +46,7 @@ export default function BrandStockReport() {
     if (typeof aVal === 'number' && typeof bVal === 'number') {
       return sortAsc ? aVal - bVal : bVal - aVal;
     }
-    return sortAsc 
+    return sortAsc
       ? String(aVal).localeCompare(String(bVal))
       : String(bVal).localeCompare(String(aVal));
   });
@@ -68,11 +68,11 @@ export default function BrandStockReport() {
       row.SKU_Count,
       row.Total_QOH
     ]);
-    
+
     const csv = [headers, ...rows]
       .map(row => row.map(cell => `"${cell}"`).join(','))
       .join('\n');
-    
+
     const blob = new Blob([csv], { type: 'text/csv' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -83,42 +83,42 @@ export default function BrandStockReport() {
   };
 
   const SortIcon = ({ column }: { column: SortKey }) => {
-    if (sortKey !== column) return <span className="text-violet-300/50 ml-1">↕</span>;
-    return <span className="ml-1 text-violet-500">{sortAsc ? '↑' : '↓'}</span>;
+    if (sortKey !== column) return <span className="text-[#9ca3af]/50 ml-1">↕</span>;
+    return <span className="ml-1 text-[#a78bfa]">{sortAsc ? '↑' : '↓'}</span>;
   };
 
   const totalSKUs = data.reduce((sum, row) => sum + row.SKU_Count, 0);
   const totalQOH = data.reduce((sum, row) => sum + row.Total_QOH, 0);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-violet-50 to-rose-50 text-slate-700 p-8 font-sans">
+    <div className="min-h-screen bg-[#1a1a1a] text-[#f5f5f5] p-8 font-sans">
       <div className="max-w-6xl mx-auto">
-        
+
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-3xl font-light text-slate-800 tracking-tight">
+            <h1 className="text-3xl font-bold text-[#f5c518] tracking-tight">
               Brand Stock Report
             </h1>
             {lastUpdated && (
-              <p className="text-violet-400 text-sm mt-1 font-light">
+              <p className="text-[#a78bfa] text-sm mt-1">
                 Updated {lastUpdated.toLocaleTimeString()}
               </p>
             )}
           </div>
-          
+
           <div className="flex gap-3">
-            <button 
-              onClick={fetchData} 
+            <button
+              onClick={fetchData}
               disabled={loading}
-              className="px-5 py-2.5 bg-white text-slate-600 rounded-full shadow-sm border border-slate-200 hover:border-violet-300 hover:shadow-md disabled:opacity-50 transition-all duration-200"
+              className="px-5 py-2.5 bg-[#2a2a2a] text-[#f5f5f5] rounded-xl border border-[#3f3f3f] hover:border-[#a78bfa] hover:text-[#a78bfa] disabled:opacity-50 transition-all duration-200"
             >
               {loading ? '...' : 'Refresh'}
             </button>
-            
-            <button 
+
+            <button
               onClick={exportCSV}
               disabled={loading || data.length === 0}
-              className="px-5 py-2.5 bg-gradient-to-r from-violet-500 to-purple-500 text-white rounded-full shadow-md hover:shadow-lg hover:from-violet-600 hover:to-purple-600 disabled:opacity-50 transition-all duration-200"
+              className="px-5 py-2.5 bg-[#f5c518] text-[#1a1a1a] font-semibold rounded-xl hover:bg-[#fcd34d] disabled:opacity-50 transition-all duration-200"
             >
               Export CSV
             </button>
@@ -126,7 +126,7 @@ export default function BrandStockReport() {
         </div>
 
         {error && (
-          <div className="bg-rose-50 border border-rose-200 text-rose-600 p-4 rounded-2xl mb-6">
+          <div className="bg-red-900/30 border border-red-500/50 text-red-400 p-4 rounded-xl mb-6">
             {error}
           </div>
         )}
@@ -134,45 +134,45 @@ export default function BrandStockReport() {
         {!loading && !error && (
           <>
             <div className="grid grid-cols-3 gap-5 mb-8">
-              <div className="bg-white/70 backdrop-blur-sm border border-white rounded-2xl p-5 shadow-sm">
-                <p className="text-violet-400 text-xs uppercase tracking-widest font-medium">Brands</p>
-                <p className="text-4xl font-light text-slate-800 mt-1">{data.length.toLocaleString()}</p>
+              <div className="bg-[#2a2a2a] border border-[#3f3f3f] rounded-xl p-5">
+                <p className="text-[#a78bfa] text-xs uppercase tracking-widest font-medium">Brands</p>
+                <p className="text-4xl font-bold text-[#f5f5f5] mt-1">{data.length.toLocaleString()}</p>
               </div>
-              <div className="bg-white/70 backdrop-blur-sm border border-white rounded-2xl p-5 shadow-sm">
-                <p className="text-violet-400 text-xs uppercase tracking-widest font-medium">Total SKUs</p>
-                <p className="text-4xl font-light text-violet-600 mt-1">{totalSKUs.toLocaleString()}</p>
+              <div className="bg-[#2a2a2a] border border-[#3f3f3f] rounded-xl p-5 border-l-4 border-l-[#f5c518]">
+                <p className="text-[#a78bfa] text-xs uppercase tracking-widest font-medium">Total SKUs</p>
+                <p className="text-4xl font-bold text-[#f5c518] mt-1">{totalSKUs.toLocaleString()}</p>
               </div>
-              <div className="bg-white/70 backdrop-blur-sm border border-white rounded-2xl p-5 shadow-sm">
-                <p className="text-violet-400 text-xs uppercase tracking-widest font-medium">Total QOH</p>
-                <p className="text-4xl font-light text-slate-800 mt-1">{totalQOH.toLocaleString()}</p>
+              <div className="bg-[#2a2a2a] border border-[#3f3f3f] rounded-xl p-5">
+                <p className="text-[#a78bfa] text-xs uppercase tracking-widest font-medium">Total QOH</p>
+                <p className="text-4xl font-bold text-[#f5f5f5] mt-1">{totalQOH.toLocaleString()}</p>
               </div>
             </div>
 
-            <div className="bg-white/80 backdrop-blur-sm border border-white rounded-2xl shadow-sm overflow-hidden">
+            <div className="bg-[#2a2a2a] border border-[#3f3f3f] rounded-xl overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead>
-                    <tr className="border-b border-violet-100">
-                      <th 
-                        className="p-4 text-left cursor-pointer hover:bg-violet-50/50 transition text-violet-400 font-medium text-sm uppercase tracking-wider"
+                    <tr className="border-b border-[#3f3f3f]">
+                      <th
+                        className="p-4 text-left cursor-pointer hover:bg-[#3a3a3a] transition text-[#a78bfa] font-medium text-sm uppercase tracking-wider"
                         onClick={() => handleSort('Scraped_Brand')}
                       >
                         Brand <SortIcon column="Scraped_Brand" />
                       </th>
-                      <th 
-                        className="p-4 text-left cursor-pointer hover:bg-violet-50/50 transition text-violet-400 font-medium text-sm uppercase tracking-wider"
+                      <th
+                        className="p-4 text-left cursor-pointer hover:bg-[#3a3a3a] transition text-[#a78bfa] font-medium text-sm uppercase tracking-wider"
                         onClick={() => handleSort('Scraped_Supplier')}
                       >
                         Supplier <SortIcon column="Scraped_Supplier" />
                       </th>
-                      <th 
-                        className="p-4 text-right cursor-pointer hover:bg-violet-50/50 transition text-violet-400 font-medium text-sm uppercase tracking-wider"
+                      <th
+                        className="p-4 text-right cursor-pointer hover:bg-[#3a3a3a] transition text-[#a78bfa] font-medium text-sm uppercase tracking-wider"
                         onClick={() => handleSort('SKU_Count')}
                       >
                         SKU Count <SortIcon column="SKU_Count" />
                       </th>
-                      <th 
-                        className="p-4 text-right cursor-pointer hover:bg-violet-50/50 transition text-violet-400 font-medium text-sm uppercase tracking-wider"
+                      <th
+                        className="p-4 text-right cursor-pointer hover:bg-[#3a3a3a] transition text-[#a78bfa] font-medium text-sm uppercase tracking-wider"
                         onClick={() => handleSort('Total_QOH')}
                       >
                         Total QOH <SortIcon column="Total_QOH" />
@@ -181,23 +181,23 @@ export default function BrandStockReport() {
                   </thead>
                   <tbody>
                     {sortedData.map((row, i) => (
-                      <tr 
-                        key={i} 
-                        className="border-b border-slate-100/50 hover:bg-violet-50/30 transition-colors duration-150"
+                      <tr
+                        key={i}
+                        className="border-b border-[#3f3f3f]/50 hover:bg-[#3a3a3a]/50 transition-colors duration-150"
                       >
-                        <td className="p-4 font-medium text-slate-700">{row.Scraped_Brand}</td>
-                        <td className="p-4 text-slate-400">{row.Scraped_Supplier}</td>
-                        <td className="p-4 text-right font-light text-slate-600">{row.SKU_Count.toLocaleString()}</td>
-                        <td className="p-4 text-right font-light text-slate-600">{row.Total_QOH.toLocaleString()}</td>
+                        <td className="p-4 font-medium text-[#f5f5f5]">{row.Scraped_Brand}</td>
+                        <td className="p-4 text-[#9ca3af]">{row.Scraped_Supplier}</td>
+                        <td className="p-4 text-right text-[#f5f5f5]">{row.SKU_Count.toLocaleString()}</td>
+                        <td className="p-4 text-right text-[#f5f5f5]">{row.Total_QOH.toLocaleString()}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
             </div>
-            
-            <p className="text-center text-violet-300 text-sm mt-6 font-light">
-              ✨ Made with love
+
+            <p className="text-center text-[#9ca3af] text-sm mt-6">
+              💛💜 Grace x GSS
             </p>
           </>
         )}
