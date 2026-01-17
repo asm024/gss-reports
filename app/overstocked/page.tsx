@@ -48,17 +48,23 @@ export default function OverstockedDashboard() {
     setLoading(true);
     setError('');
     try {
-      const [sumRes, brandRes, catRes, listRes] = await Promise.all([
-        fetch('/api/overstocked/summary'),
-        fetch('/api/overstocked/by-brand'),
-        fetch('/api/overstocked/by-category'),
-        fetch('/api/overstocked/list'),
-      ]);
-      if (!sumRes.ok || !brandRes.ok || !catRes.ok || !listRes.ok) throw new Error('Failed to fetch');
+      // Load sequentially instead of parallel to avoid overwhelming slow view
+      const sumRes = await fetch('/api/overstocked/summary');
+      if (!sumRes.ok) throw new Error('Failed to fetch summary');
       setSummary(await sumRes.json());
+
+      const brandRes = await fetch('/api/overstocked/by-brand');
+      if (!brandRes.ok) throw new Error('Failed to fetch by-brand');
       setByBrand(await brandRes.json());
+
+      const catRes = await fetch('/api/overstocked/by-category');
+      if (!catRes.ok) throw new Error('Failed to fetch by-category');
       setByCategory(await catRes.json());
+
+      const listRes = await fetch('/api/overstocked/list');
+      if (!listRes.ok) throw new Error('Failed to fetch list');
       setList(await listRes.json());
+
       setLastUpdated(new Date());
     } catch (err) {
       setError('Failed to load data');
