@@ -19,6 +19,30 @@ export default function Home() {
               SKU counts and stock on hand by brand and supplier.
             </p>
           </Link>
+
+          <Link 
+            href="/no-category" 
+            className="block bg-[#2a2a2a] border border-[#3f3f3f] rounded-xl p-5 hover:border-[#a78bfa] hover:bg-[#3a3a3a] transition-all duration-200 group"
+          >
+            <h2 className="text-lg font-semibold text-[#f5f5f5] group-hover:text-[#f5c518] transition-colors">
+              Products With Stock - No Category
+            </h2>
+            <p className="text-[#9ca3af] text-sm mt-1">
+              Products with stock that need categorisation.
+            </p>
+          </Link>
+
+          <Link 
+            href="/tba-brand" 
+            className="block bg-[#2a2a2a] border border-[#3f3f3f] rounded-xl p-5 hover:border-[#a78bfa] hover:bg-[#3a3a3a] transition-all duration-200 group"
+          >
+            <h2 className="text-lg font-semibold text-[#f5f5f5] group-hover:text-[#f5c518] transition-colors">
+              Products With Stock - TBA Brand
+            </h2>
+            <p className="text-[#9ca3af] text-sm mt-1">
+              Products with stock that need brand assignment.
+            </p>
+          </Link>
         </div>
       </div>
     </div>
