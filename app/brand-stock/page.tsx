@@ -83,40 +83,42 @@ export default function BrandStockReport() {
   };
 
   const SortIcon = ({ column }: { column: SortKey }) => {
-    if (sortKey !== column) return <span className="text-zinc-500 ml-1">↕</span>;
-    return <span className="ml-1 text-amber-500">{sortAsc ? '↑' : '↓'}</span>;
+    if (sortKey !== column) return <span className="text-violet-300/50 ml-1">↕</span>;
+    return <span className="ml-1 text-violet-500">{sortAsc ? '↑' : '↓'}</span>;
   };
 
   const totalSKUs = data.reduce((sum, row) => sum + row.SKU_Count, 0);
   const totalQOH = data.reduce((sum, row) => sum + row.Total_QOH, 0);
 
   return (
-    <div className="min-h-screen bg-zinc-900 text-zinc-100 p-6 font-sans">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-violet-50 to-rose-50 text-slate-700 p-8 font-sans">
+      <div className="max-w-6xl mx-auto">
         
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-2xl font-bold text-white">Brand Stock Report</h1>
+            <h1 className="text-3xl font-light text-slate-800 tracking-tight">
+              Brand Stock Report
+            </h1>
             {lastUpdated && (
-              <p className="text-zinc-500 text-sm mt-1">
-                Last updated: {lastUpdated.toLocaleTimeString()}
+              <p className="text-violet-400 text-sm mt-1 font-light">
+                Updated {lastUpdated.toLocaleTimeString()}
               </p>
             )}
           </div>
           
-          <div className="flex gap-2">
+          <div className="flex gap-3">
             <button 
               onClick={fetchData} 
               disabled={loading}
-              className="px-4 py-2 bg-zinc-700 text-white rounded hover:bg-zinc-600 disabled:bg-zinc-800 disabled:text-zinc-500 transition"
+              className="px-5 py-2.5 bg-white text-slate-600 rounded-full shadow-sm border border-slate-200 hover:border-violet-300 hover:shadow-md disabled:opacity-50 transition-all duration-200"
             >
-              {loading ? 'Loading...' : 'Refresh'}
+              {loading ? '...' : 'Refresh'}
             </button>
             
             <button 
               onClick={exportCSV}
               disabled={loading || data.length === 0}
-              className="px-4 py-2 bg-amber-600 text-white rounded hover:bg-amber-500 disabled:bg-zinc-800 disabled:text-zinc-500 transition"
+              className="px-5 py-2.5 bg-gradient-to-r from-violet-500 to-purple-500 text-white rounded-full shadow-md hover:shadow-lg hover:from-violet-600 hover:to-purple-600 disabled:opacity-50 transition-all duration-200"
             >
               Export CSV
             </button>
@@ -124,53 +126,53 @@ export default function BrandStockReport() {
         </div>
 
         {error && (
-          <div className="bg-red-900/50 border border-red-700 text-red-200 p-4 rounded mb-6">
+          <div className="bg-rose-50 border border-rose-200 text-rose-600 p-4 rounded-2xl mb-6">
             {error}
           </div>
         )}
 
         {!loading && !error && (
           <>
-            <div className="grid grid-cols-3 gap-4 mb-6">
-              <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-4">
-                <p className="text-zinc-400 text-sm uppercase tracking-wide">Brands</p>
-                <p className="text-3xl font-bold text-white">{data.length.toLocaleString()}</p>
+            <div className="grid grid-cols-3 gap-5 mb-8">
+              <div className="bg-white/70 backdrop-blur-sm border border-white rounded-2xl p-5 shadow-sm">
+                <p className="text-violet-400 text-xs uppercase tracking-widest font-medium">Brands</p>
+                <p className="text-4xl font-light text-slate-800 mt-1">{data.length.toLocaleString()}</p>
               </div>
-              <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-4">
-                <p className="text-zinc-400 text-sm uppercase tracking-wide">Total SKUs</p>
-                <p className="text-3xl font-bold text-amber-500">{totalSKUs.toLocaleString()}</p>
+              <div className="bg-white/70 backdrop-blur-sm border border-white rounded-2xl p-5 shadow-sm">
+                <p className="text-violet-400 text-xs uppercase tracking-widest font-medium">Total SKUs</p>
+                <p className="text-4xl font-light text-violet-600 mt-1">{totalSKUs.toLocaleString()}</p>
               </div>
-              <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-4">
-                <p className="text-zinc-400 text-sm uppercase tracking-wide">Total QOH</p>
-                <p className="text-3xl font-bold text-white">{totalQOH.toLocaleString()}</p>
+              <div className="bg-white/70 backdrop-blur-sm border border-white rounded-2xl p-5 shadow-sm">
+                <p className="text-violet-400 text-xs uppercase tracking-widest font-medium">Total QOH</p>
+                <p className="text-4xl font-light text-slate-800 mt-1">{totalQOH.toLocaleString()}</p>
               </div>
             </div>
 
-            <div className="bg-zinc-800 border border-zinc-700 rounded-lg overflow-hidden">
+            <div className="bg-white/80 backdrop-blur-sm border border-white rounded-2xl shadow-sm overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="sticky top-0">
-                    <tr className="bg-zinc-900 border-b border-zinc-700">
+                  <thead>
+                    <tr className="border-b border-violet-100">
                       <th 
-                        className="p-3 text-left cursor-pointer hover:bg-zinc-800 transition text-zinc-300 font-semibold"
+                        className="p-4 text-left cursor-pointer hover:bg-violet-50/50 transition text-violet-400 font-medium text-sm uppercase tracking-wider"
                         onClick={() => handleSort('Scraped_Brand')}
                       >
                         Brand <SortIcon column="Scraped_Brand" />
                       </th>
                       <th 
-                        className="p-3 text-left cursor-pointer hover:bg-zinc-800 transition text-zinc-300 font-semibold"
+                        className="p-4 text-left cursor-pointer hover:bg-violet-50/50 transition text-violet-400 font-medium text-sm uppercase tracking-wider"
                         onClick={() => handleSort('Scraped_Supplier')}
                       >
                         Supplier <SortIcon column="Scraped_Supplier" />
                       </th>
                       <th 
-                        className="p-3 text-right cursor-pointer hover:bg-zinc-800 transition text-zinc-300 font-semibold"
+                        className="p-4 text-right cursor-pointer hover:bg-violet-50/50 transition text-violet-400 font-medium text-sm uppercase tracking-wider"
                         onClick={() => handleSort('SKU_Count')}
                       >
                         SKU Count <SortIcon column="SKU_Count" />
                       </th>
                       <th 
-                        className="p-3 text-right cursor-pointer hover:bg-zinc-800 transition text-zinc-300 font-semibold"
+                        className="p-4 text-right cursor-pointer hover:bg-violet-50/50 transition text-violet-400 font-medium text-sm uppercase tracking-wider"
                         onClick={() => handleSort('Total_QOH')}
                       >
                         Total QOH <SortIcon column="Total_QOH" />
@@ -181,20 +183,22 @@ export default function BrandStockReport() {
                     {sortedData.map((row, i) => (
                       <tr 
                         key={i} 
-                        className={`border-b border-zinc-700/50 hover:bg-zinc-700/30 transition ${
-                          i % 2 === 0 ? 'bg-zinc-800/50' : 'bg-zinc-800'
-                        }`}
+                        className="border-b border-slate-100/50 hover:bg-violet-50/30 transition-colors duration-150"
                       >
-                        <td className="p-3 font-medium">{row.Scraped_Brand}</td>
-                        <td className="p-3 text-zinc-400">{row.Scraped_Supplier}</td>
-                        <td className="p-3 text-right font-mono">{row.SKU_Count.toLocaleString()}</td>
-                        <td className="p-3 text-right font-mono">{row.Total_QOH.toLocaleString()}</td>
+                        <td className="p-4 font-medium text-slate-700">{row.Scraped_Brand}</td>
+                        <td className="p-4 text-slate-400">{row.Scraped_Supplier}</td>
+                        <td className="p-4 text-right font-light text-slate-600">{row.SKU_Count.toLocaleString()}</td>
+                        <td className="p-4 text-right font-light text-slate-600">{row.Total_QOH.toLocaleString()}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
             </div>
+            
+            <p className="text-center text-violet-300 text-sm mt-6 font-light">
+              ✨ Made with love
+            </p>
           </>
         )}
       </div>
