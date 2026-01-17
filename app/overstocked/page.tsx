@@ -115,10 +115,7 @@ export default function OverstockedDashboard() {
             <h1 className="text-3xl font-bold text-[#f5c518] tracking-tight">Overstocked Items Dashboard</h1>
             {lastUpdated && <p className="text-[#a78bfa] text-sm mt-1">Updated {lastUpdated.toLocaleTimeString()}</p>}
           </div>
-          <div className="flex gap-3">
-            <button onClick={fetchData} disabled={loading} className="px-5 py-2.5 bg-[#2a2a2a] text-[#f5f5f5] rounded-xl border border-[#3f3f3f] hover:border-[#a78bfa] hover:text-[#a78bfa] disabled:opacity-50 transition-all duration-200">{loading ? '...' : 'Refresh'}</button>
-            <button onClick={exportCSV} disabled={loading || list.length === 0} className="px-5 py-2.5 bg-[#f5c518] text-[#1a1a1a] font-semibold rounded-xl hover:bg-[#fcd34d] disabled:opacity-50 transition-all duration-200">Export CSV</button>
-          </div>
+          <button onClick={fetchData} disabled={loading} className="px-5 py-2.5 bg-[#2a2a2a] text-[#f5f5f5] rounded-xl border border-[#3f3f3f] hover:border-[#a78bfa] hover:text-[#a78bfa] disabled:opacity-50 transition-all duration-200">{loading ? '...' : 'Refresh'}</button>
         </div>
 
         {error && <div className="bg-red-900/30 border border-red-500/50 text-red-400 p-4 rounded-xl mb-6">{error}</div>}
@@ -149,7 +146,7 @@ export default function OverstockedDashboard() {
                 <button onClick={() => setActiveTab('brand')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === 'brand' ? 'bg-[#f5c518] text-[#1a1a1a]' : 'bg-[#3a3a3a] text-[#9ca3af] hover:text-[#f5f5f5]'}`}>By Brand</button>
                 <button onClick={() => setActiveTab('category')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === 'category' ? 'bg-[#f5c518] text-[#1a1a1a]' : 'bg-[#3a3a3a] text-[#9ca3af] hover:text-[#f5f5f5]'}`}>By Category</button>
               </div>
-              <div className="overflow-x-auto max-h-64 overflow-y-auto">
+              <div className="overflow-x-auto max-h-80 overflow-y-auto">
                 <table className="w-full">
                   <thead className="sticky top-0 bg-[#2a2a2a]">
                     <tr className="border-b border-[#3f3f3f]">
@@ -174,10 +171,11 @@ export default function OverstockedDashboard() {
             </div>
 
             <div className="bg-[#2a2a2a] border border-[#3f3f3f] rounded-xl overflow-hidden">
-              <div className="p-4 border-b border-[#3f3f3f]">
+              <div className="p-4 border-b border-[#3f3f3f] flex items-center justify-between">
                 <h2 className="text-lg font-semibold text-[#f5f5f5]">All Overstocked Items ({list.length.toLocaleString()} items)</h2>
+                <button onClick={exportCSV} disabled={loading || list.length === 0} className="px-4 py-2 bg-[#f5c518] text-[#1a1a1a] font-semibold rounded-lg hover:bg-[#fcd34d] disabled:opacity-50 transition-all duration-200 text-sm">Export Full List CSV</button>
               </div>
-              <div className="overflow-x-auto max-h-96 overflow-y-auto">
+              <div className="overflow-x-auto" style=maxHeight: 'calc(100vh - 650px)', minHeight: '400px', overflowY: 'auto'>
                 <table className="w-full">
                   <thead className="sticky top-0 bg-[#2a2a2a]">
                     <tr className="border-b border-[#3f3f3f]">
