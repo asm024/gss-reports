@@ -20,7 +20,6 @@ interface BreakdownRow {
 
 interface ListRow {
   SKU: string;
-  SKU: string;
   Title: string;
   Brand: string;
   Category: string;
