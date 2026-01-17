@@ -183,7 +183,7 @@ export default function DeadStockDashboard() {
                 <h2 className="text-lg font-semibold text-[#f5f5f5]">All Dead Stock ({list.length.toLocaleString()} items)</h2>
                 <button onClick={exportCSV} disabled={loading || list.length === 0} className="px-4 py-2 bg-[#f5c518] text-[#1a1a1a] font-semibold rounded-lg hover:bg-[#fcd34d] disabled:opacity-50 transition-all duration-200 text-sm">Export Full List CSV</button>
               </div>
-              <div className="overflow-x-auto" style= maxHeight: 'calc(100vh - 650px)', minHeight: '400px' >
+              <div className="overflow-x-auto" style=241>
                 <table className="w-full">
                   <thead className="sticky top-0 bg-[#2a2a2a]">
                     <tr className="border-b border-[#3f3f3f]">
