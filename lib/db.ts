@@ -11,6 +11,11 @@ const config: sql.config = {
   },
 };
 
+let pool: sql.ConnectionPool | null = null;
+
 export async function getConnection() {
-  return await sql.connect(config);
+  if (!pool) {
+    pool = await sql.connect(config);
+  }
+  return pool;
 }
