@@ -8,6 +8,11 @@ export default function Home() {
         <p className="text-[#9ca3af] mb-10">Internal reporting tools for GSS Auto Parts.</p>
         
         <div className="space-y-4">
+          <Link href="/dead-stock" className="block bg-[#2a2a2a] border border-[#3f3f3f] rounded-xl p-5 hover:border-[#f5c518] hover:bg-[#3a3a3a] transition-all duration-200 group border-l-4 border-l-[#f5c518]">
+            <h2 className="text-lg font-semibold text-[#f5c518] group-hover:text-[#fcd34d] transition-colors">Dead Stock Dashboard</h2>
+            <p className="text-[#9ca3af] text-sm mt-1">Analysis of dead stock by brand, category, and age. Identify items to liquidate.</p>
+          </Link>
+
           <Link href="/brand-stock" className="block bg-[#2a2a2a] border border-[#3f3f3f] rounded-xl p-5 hover:border-[#a78bfa] hover:bg-[#3a3a3a] transition-all duration-200 group">
             <h2 className="text-lg font-semibold text-[#f5f5f5] group-hover:text-[#f5c518] transition-colors">Brand Stock Report</h2>
             <p className="text-[#9ca3af] text-sm mt-1">SKU counts and stock on hand by brand and supplier.</p>
