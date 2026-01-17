@@ -18,6 +18,7 @@ export default function BrandStockReport() {
   const [error, setError] = useState('');
   const [sortKey, setSortKey] = useState<SortKey>('SKU_Count');
   const [sortAsc, setSortAsc] = useState(false);
+  const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
 
   const fetchData = async () => {
     setLoading(true);
@@ -27,6 +28,7 @@ export default function BrandStockReport() {
       if (!res.ok) throw new Error('Failed to fetch');
       const json = await res.json();
       setData(json);
+      setLastUpdated(new Date());
     } catch (err) {
       setError('Failed to load data');
     } finally {
@@ -81,79 +83,121 @@ export default function BrandStockReport() {
   };
 
   const SortIcon = ({ column }: { column: SortKey }) => {
-    if (sortKey !== column) return <span className="text-gray-300 ml-1">↕</span>;
-    return <span className="ml-1">{sortAsc ? '↑' : '↓'}</span>;
+    if (sortKey !== column) return <span className="text-zinc-500 ml-1">↕</span>;
+    return <span className="ml-1 text-amber-500">{sortAsc ? '↑' : '↓'}</span>;
   };
 
+  const totalSKUs = data.reduce((sum, row) => sum + row.SKU_Count, 0);
+  const totalQOH = data.reduce((sum, row) => sum + row.Total_QOH, 0);
+
   return (
-    <div className="p-8 font-sans">
-      <h1 className="text-2xl font-bold mb-4">Brand Stock Report</h1>
-      
-      <div className="mb-4 flex gap-2">
-        <button 
-          onClick={fetchData} 
-          disabled={loading}
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:bg-gray-400"
-        >
-          {loading ? 'Loading...' : 'Refresh'}
-        </button>
+    <div className="min-h-screen bg-zinc-900 text-zinc-100 p-6 font-sans">
+      <div className="max-w-7xl mx-auto">
         
-        <button 
-          onClick={exportCSV}
-          disabled={loading || data.length === 0}
-          className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 disabled:bg-gray-400"
-        >
-          Export CSV
-        </button>
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h1 className="text-2xl font-bold text-white">Brand Stock Report</h1>
+            {lastUpdated && (
+              <p className="text-zinc-500 text-sm mt-1">
+                Last updated: {lastUpdated.toLocaleTimeString()}
+              </p>
+            )}
+          </div>
+          
+          <div className="flex gap-2">
+            <button 
+              onClick={fetchData} 
+              disabled={loading}
+              className="px-4 py-2 bg-zinc-700 text-white rounded hover:bg-zinc-600 disabled:bg-zinc-800 disabled:text-zinc-500 transition"
+            >
+              {loading ? 'Loading...' : 'Refresh'}
+            </button>
+            
+            <button 
+              onClick={exportCSV}
+              disabled={loading || data.length === 0}
+              className="px-4 py-2 bg-amber-600 text-white rounded hover:bg-amber-500 disabled:bg-zinc-800 disabled:text-zinc-500 transition"
+            >
+              Export CSV
+            </button>
+          </div>
+        </div>
+
+        {error && (
+          <div className="bg-red-900/50 border border-red-700 text-red-200 p-4 rounded mb-6">
+            {error}
+          </div>
+        )}
+
+        {!loading && !error && (
+          <>
+            <div className="grid grid-cols-3 gap-4 mb-6">
+              <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-4">
+                <p className="text-zinc-400 text-sm uppercase tracking-wide">Brands</p>
+                <p className="text-3xl font-bold text-white">{data.length.toLocaleString()}</p>
+              </div>
+              <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-4">
+                <p className="text-zinc-400 text-sm uppercase tracking-wide">Total SKUs</p>
+                <p className="text-3xl font-bold text-amber-500">{totalSKUs.toLocaleString()}</p>
+              </div>
+              <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-4">
+                <p className="text-zinc-400 text-sm uppercase tracking-wide">Total QOH</p>
+                <p className="text-3xl font-bold text-white">{totalQOH.toLocaleString()}</p>
+              </div>
+            </div>
+
+            <div className="bg-zinc-800 border border-zinc-700 rounded-lg overflow-hidden">
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="sticky top-0">
+                    <tr className="bg-zinc-900 border-b border-zinc-700">
+                      <th 
+                        className="p-3 text-left cursor-pointer hover:bg-zinc-800 transition text-zinc-300 font-semibold"
+                        onClick={() => handleSort('Scraped_Brand')}
+                      >
+                        Brand <SortIcon column="Scraped_Brand" />
+                      </th>
+                      <th 
+                        className="p-3 text-left cursor-pointer hover:bg-zinc-800 transition text-zinc-300 font-semibold"
+                        onClick={() => handleSort('Scraped_Supplier')}
+                      >
+                        Supplier <SortIcon column="Scraped_Supplier" />
+                      </th>
+                      <th 
+                        className="p-3 text-right cursor-pointer hover:bg-zinc-800 transition text-zinc-300 font-semibold"
+                        onClick={() => handleSort('SKU_Count')}
+                      >
+                        SKU Count <SortIcon column="SKU_Count" />
+                      </th>
+                      <th 
+                        className="p-3 text-right cursor-pointer hover:bg-zinc-800 transition text-zinc-300 font-semibold"
+                        onClick={() => handleSort('Total_QOH')}
+                      >
+                        Total QOH <SortIcon column="Total_QOH" />
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {sortedData.map((row, i) => (
+                      <tr 
+                        key={i} 
+                        className={`border-b border-zinc-700/50 hover:bg-zinc-700/30 transition ${
+                          i % 2 === 0 ? 'bg-zinc-800/50' : 'bg-zinc-800'
+                        }`}
+                      >
+                        <td className="p-3 font-medium">{row.Scraped_Brand}</td>
+                        <td className="p-3 text-zinc-400">{row.Scraped_Supplier}</td>
+                        <td className="p-3 text-right font-mono">{row.SKU_Count.toLocaleString()}</td>
+                        <td className="p-3 text-right font-mono">{row.Total_QOH.toLocaleString()}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </>
+        )}
       </div>
-
-      {error && <p className="text-red-500">{error}</p>}
-
-      {!loading && !error && (
-        <>
-          <p className="mb-2 text-gray-600">{data.length} brands</p>
-          <table className="w-full border-collapse border border-gray-300">
-            <thead>
-              <tr className="bg-gray-100">
-                <th 
-                  className="border border-gray-300 p-2 text-left cursor-pointer hover:bg-gray-200"
-                  onClick={() => handleSort('Scraped_Brand')}
-                >
-                  Brand <SortIcon column="Scraped_Brand" />
-                </th>
-                <th 
-                  className="border border-gray-300 p-2 text-left cursor-pointer hover:bg-gray-200"
-                  onClick={() => handleSort('Scraped_Supplier')}
-                >
-                  Supplier <SortIcon column="Scraped_Supplier" />
-                </th>
-                <th 
-                  className="border border-gray-300 p-2 text-right cursor-pointer hover:bg-gray-200"
-                  onClick={() => handleSort('SKU_Count')}
-                >
-                  SKU Count <SortIcon column="SKU_Count" />
-                </th>
-                <th 
-                  className="border border-gray-300 p-2 text-right cursor-pointer hover:bg-gray-200"
-                  onClick={() => handleSort('Total_QOH')}
-                >
-                  Total QOH <SortIcon column="Total_QOH" />
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {sortedData.map((row, i) => (
-                <tr key={i} className="hover:bg-gray-50">
-                  <td className="border border-gray-300 p-2">{row.Scraped_Brand}</td>
-                  <td className="border border-gray-300 p-2">{row.Scraped_Supplier}</td>
-                  <td className="border border-gray-300 p-2 text-right">{row.SKU_Count.toLocaleString()}</td>
-                  <td className="border border-gray-300 p-2 text-right">{row.Total_QOH.toLocaleString()}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </>
-      )}
     </div>
   );
 }
