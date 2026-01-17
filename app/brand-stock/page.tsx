@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 interface BrandRow {
   ID: number;
@@ -96,6 +97,9 @@ export default function BrandStockReport() {
 
         <div className="flex items-center justify-between mb-8">
           <div>
+            <Link href="/" className="text-[#a78bfa] hover:text-[#c4b5fd] text-sm mb-1 inline-block">
+              ← Back
+            </Link>
             <h1 className="text-3xl font-bold text-[#f5c518] tracking-tight">
               Brand Stock Report
             </h1>
