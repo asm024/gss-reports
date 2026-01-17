@@ -20,6 +20,7 @@ interface BreakdownRow {
 
 interface ListRow {
   SKU: string;
+  SKU: string;
   Title: string;
   Brand: string;
   Category: string;
@@ -175,7 +176,7 @@ export default function OverstockedDashboard() {
                 <h2 className="text-lg font-semibold text-[#f5f5f5]">All Overstocked Items ({list.length.toLocaleString()} items)</h2>
                 <button onClick={exportCSV} disabled={loading || list.length === 0} className="px-4 py-2 bg-[#f5c518] text-[#1a1a1a] font-semibold rounded-lg hover:bg-[#fcd34d] disabled:opacity-50 transition-all duration-200 text-sm">Export Full List CSV</button>
               </div>
-              <div className="overflow-x-auto overflow-y-auto" style=maxHeight: 'calc(100vh - 650px)', minHeight: '400px', overflowY: 'auto'>
+              <div className="overflow-x-auto max-h-96 overflow-y-auto">
                 <table className="w-full">
                   <thead className="sticky top-0 bg-[#2a2a2a]">
                     <tr className="border-b border-[#3f3f3f]">
