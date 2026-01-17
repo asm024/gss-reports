@@ -13,6 +13,11 @@ export default function Home() {
             <p className="text-[#9ca3af] text-sm mt-1">Analysis of dead stock by brand, category, and age. Identify items to liquidate.</p>
           </Link>
 
+          <Link href="/overstocked" className="block bg-[#2a2a2a] border border-[#3f3f3f] rounded-xl p-5 hover:border-[#f5c518] hover:bg-[#3a3a3a] transition-all duration-200 group border-l-4 border-l-orange-500">
+            <h2 className="text-lg font-semibold text-orange-400 group-hover:text-orange-300 transition-colors">Overstocked Items Dashboard</h2>
+            <p className="text-[#9ca3af] text-sm mt-1">Items exceeding maximum stock levels. Identify excess inventory to reduce.</p>
+          </Link>
+
           <Link href="/brand-stock" className="block bg-[#2a2a2a] border border-[#3f3f3f] rounded-xl p-5 hover:border-[#a78bfa] hover:bg-[#3a3a3a] transition-all duration-200 group">
             <h2 className="text-lg font-semibold text-[#f5f5f5] group-hover:text-[#f5c518] transition-colors">Brand Stock Report</h2>
             <p className="text-[#9ca3af] text-sm mt-1">SKU counts and stock on hand by brand and supplier.</p>
