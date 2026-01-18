@@ -13,7 +13,7 @@ export async function GET() {
 <<<<<<< HEAD
       FROM dbo.vw_DeadStockUnlisted
 =======
-      FROM dbo.vw_DeadStock
+      FROM dbo.vw_DeadStockUnlisted
 >>>>>>> 2a91509 (Add Dead Stock Unlisted report)
       GROUP BY Category
       ORDER BY SUM(StockValue) DESC

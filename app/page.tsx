@@ -15,7 +15,7 @@ export default function Home() {
 
           <Link href="/dead-stock-unlisted" className="block bg-[#2a2a2a] border border-[#3f3f3f] rounded-xl p-5 hover:border-[#f5c518] hover:bg-[#3a3a3a] transition-all duration-200 group border-l-4 border-l-[#f5c518]">
             <h2 className="text-lg font-semibold text-[#f5c518] group-hover:text-[#fcd34d] transition-colors">Dead Stock - Not on eBay Clearance Dashboard</h2>
-            <p className="text-[#9ca3af] text-sm mt-1">Dead stock not yet listed on eBay Clearance. Next items to add for liquidation.#</p>
+            <p className="text-[#9ca3af] text-sm mt-1">Dead stock not yet listed on eBay Clearance. Next items to add for liquidation.</p>
           </Link>
 
           <Link href="/overstocked" className="block bg-[#2a2a2a] border border-[#3f3f3f] rounded-xl p-5 hover:border-[#f5c518] hover:bg-[#3a3a3a] transition-all duration-200 group border-l-4 border-l-orange-500">

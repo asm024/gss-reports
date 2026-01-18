@@ -215,7 +215,7 @@ fetch('/api/dead-stock-unlisted/list'),
               </div>
             </div>
 
-            <p className="text-center text-[#9ca3af] text-sm mt-6">Made by Grace, for Adam 💛💜#</p>
+            <p className="text-center text-[#9ca3af] text-sm mt-6">Made by Grace, for Adam 💛💜</p>
           </>
         )}
       </div>
