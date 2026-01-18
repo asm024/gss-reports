@@ -10,11 +10,7 @@ export async function GET() {
         SUM(StockValue) AS TotalValue,
         SUM(Stock) AS TotalUnits,
         SUM(CASE WHEN LastSaleDate IS NULL THEN 1 ELSE 0 END) AS NeverSold
-<<<<<<< HEAD
       FROM dbo.vw_DeadStockUnlisted
-=======
-      FROM dbo.vw_DeadStockUnlisted
->>>>>>> 2a91509 (Add Dead Stock Unlisted report)
     `);
     return NextResponse.json(result.recordset[0]);
   } catch (error) {

@@ -10,11 +10,7 @@ export async function GET() {
         COUNT(*) AS SKUCount,
         SUM(StockValue) AS TotalValue,
         SUM(Stock) AS TotalUnits
-<<<<<<< HEAD
       FROM dbo.vw_DeadStockUnlisted
-=======
-      FROM dbo.vw_DeadStockUnlisted
->>>>>>> 2a91509 (Add Dead Stock Unlisted report)
       GROUP BY AgeBracket
       ORDER BY 
         CASE AgeBracket
