@@ -52,11 +52,11 @@ export default function DeadStockDashboard() {
     setError('');
     try {
       const [sumRes, brandRes, catRes, ageRes, listRes] = await Promise.all([
-        fetch('/api/dead-stock/summary'),
-        fetch('/api/dead-stock/by-brand'),
-        fetch('/api/dead-stock/by-category'),
-        fetch('/api/dead-stock/by-age'),
-        fetch('/api/dead-stock/list'),
+fetch('/api/dead-stock-unlisted/summary'),
+fetch('/api/dead-stock-unlisted/by-brand'),
+fetch('/api/dead-stock-unlisted/by-category'),
+fetch('/api/dead-stock-unlisted/by-age'),
+fetch('/api/dead-stock-unlisted/list'),
       ]);
       if (!sumRes.ok || !brandRes.ok || !catRes.ok || !ageRes.ok || !listRes.ok) throw new Error('Failed to fetch');
       setSummary(await sumRes.json());
@@ -98,7 +98,7 @@ export default function DeadStockDashboard() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `dead-stock-${new Date().toISOString().split('T')[0]}.csv`;
+    a.download = `dead-stock-unlisted${new Date().toISOString().split('T')[0]}.csv`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -119,11 +119,7 @@ export default function DeadStockDashboard() {
         <div className="flex items-center justify-between mb-8">
           <div>
             <Link href="/" className="text-[#a78bfa] hover:text-[#c4b5fd] text-sm mb-1 inline-block">← Back</Link>
-<<<<<<< HEAD
             <h1 className="text-3xl font-bold text-[#f5c518] tracking-tight">Dead Stock — Not on eBay Clearance</h1>
-=======
-            <h1 className="text-3xl font-bold text-[#f5c518] tracking-tight">Dead Stock Dashboard</h1>
->>>>>>> 2a91509 (Add Dead Stock Unlisted report)
             {lastUpdated && <p className="text-[#a78bfa] text-sm mt-1">Updated {lastUpdated.toLocaleTimeString()}</p>}
           </div>
           <button onClick={fetchData} disabled={loading} className="px-5 py-2.5 bg-[#2a2a2a] text-[#f5f5f5] rounded-xl border border-[#3f3f3f] hover:border-[#a78bfa] hover:text-[#a78bfa] disabled:opacity-50 transition-all duration-200">{loading ? '...' : 'Refresh'}</button>
@@ -219,7 +215,7 @@ export default function DeadStockDashboard() {
               </div>
             </div>
 
-            <p className="text-center text-[#9ca3af] text-sm mt-6">Made by Grace, for Adam 💛💜</p>
+            <p className="text-center text-[#9ca3af] text-sm mt-6">Made by Grace, for Adam 💛💜#</p>
           </>
         )}
       </div>
