@@ -6,19 +6,13 @@ export async function GET() {
     const pool = await getConnection();
     const result = await pool.request().query(`
       SELECT 
-        Brand,
-        COUNT(*) AS SKUCount,
+        COUNT(*) AS TotalSKUs,
         SUM(StockValue) AS TotalValue,
-        SUM(Stock) AS TotalUnits
-<<<<<<< HEAD
-      FROM dbo.vw_DeadStockUnlisted
-=======
+        SUM(Stock) AS TotalUnits,
+        SUM(CASE WHEN LastSaleDate IS NULL THEN 1 ELSE 0 END) AS NeverSold
       FROM dbo.vw_DeadStock
->>>>>>> 2a91509 (Add Dead Stock Unlisted report)
-      GROUP BY Brand
-      ORDER BY SUM(StockValue) DESC
     `);
-    return NextResponse.json(result.recordset);
+    return NextResponse.json(result.recordset[0]);
   } catch (error) {
     console.error('Database error:', error);
     return NextResponse.json({ error: 'Database query failed' }, { status: 500 });

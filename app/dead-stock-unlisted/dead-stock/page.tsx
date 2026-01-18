@@ -119,11 +119,7 @@ export default function DeadStockDashboard() {
         <div className="flex items-center justify-between mb-8">
           <div>
             <Link href="/" className="text-[#a78bfa] hover:text-[#c4b5fd] text-sm mb-1 inline-block">← Back</Link>
-<<<<<<< HEAD
-            <h1 className="text-3xl font-bold text-[#f5c518] tracking-tight">Dead Stock — Not on eBay Clearance</h1>
-=======
             <h1 className="text-3xl font-bold text-[#f5c518] tracking-tight">Dead Stock Dashboard</h1>
->>>>>>> 2a91509 (Add Dead Stock Unlisted report)
             {lastUpdated && <p className="text-[#a78bfa] text-sm mt-1">Updated {lastUpdated.toLocaleTimeString()}</p>}
           </div>
           <button onClick={fetchData} disabled={loading} className="px-5 py-2.5 bg-[#2a2a2a] text-[#f5f5f5] rounded-xl border border-[#3f3f3f] hover:border-[#a78bfa] hover:text-[#a78bfa] disabled:opacity-50 transition-all duration-200">{loading ? '...' : 'Refresh'}</button>

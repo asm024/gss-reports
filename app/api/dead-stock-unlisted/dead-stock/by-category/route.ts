@@ -6,16 +6,12 @@ export async function GET() {
     const pool = await getConnection();
     const result = await pool.request().query(`
       SELECT 
-        Brand,
+        ISNULL(Category, 'Uncategorised') AS Category,
         COUNT(*) AS SKUCount,
         SUM(StockValue) AS TotalValue,
         SUM(Stock) AS TotalUnits
-<<<<<<< HEAD
-      FROM dbo.vw_DeadStockUnlisted
-=======
       FROM dbo.vw_DeadStock
->>>>>>> 2a91509 (Add Dead Stock Unlisted report)
-      GROUP BY Brand
+      GROUP BY Category
       ORDER BY SUM(StockValue) DESC
     `);
     return NextResponse.json(result.recordset);

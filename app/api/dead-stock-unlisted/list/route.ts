@@ -16,7 +16,11 @@ export async function GET() {
         LastSaleDate,
         DaysSinceSale,
         AgeBracket
+<<<<<<< HEAD
       FROM dbo.vw_DeadStockUnlisted
+=======
+      FROM dbo.vw_DeadStock
+>>>>>>> 2a91509 (Add Dead Stock Unlisted report)
       ORDER BY StockValue DESC
     `);
     return NextResponse.json(result.recordset);
