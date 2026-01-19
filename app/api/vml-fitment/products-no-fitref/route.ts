@@ -6,14 +6,12 @@ export async function GET() {
     const pool = await getConnection();
     const result = await pool.request().query(`
       SELECT 
-        p.SKU,
-        p.Title,
-        b.Brand AS BrandName,
-        c.CategoryName
-      FROM dbo.vw_ProductsNoFitRef p
-      LEFT JOIN dbo.tblBrands b ON b.Brand_ID = p.Brand
-      LEFT JOIN dbo.tblCategories c ON c.Category_ID = p.Category
-      ORDER BY p.SKU
+        SKU,
+        Title,
+        Brand,
+        Category
+      FROM dbo.vw_ProductsNoFitRef
+      ORDER BY SKU
     `);
     return NextResponse.json(result.recordset);
   } catch (error) {

@@ -17,8 +17,8 @@ interface FitmentByKtype {
 interface ProductNoFitRef {
   SKU: string;
   Title: string;
-  BrandName: string;
-  CategoryName: string;
+  Brand: number | null;
+  Category: number | null;
 }
 
 interface VMLIncomplete {
