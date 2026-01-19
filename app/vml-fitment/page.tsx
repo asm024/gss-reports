@@ -143,7 +143,8 @@ export default function VMLFitmentPage() {
                     <h3 className="text-lg font-semibold text-[#f5f5f5]">Fitment Records by Ktype (Missing VML)</h3>
                     <button onClick={() => exportCSV(fitmentByKtype, 'fitment-missing-vml.csv')} className="px-3 py-1 bg-[#3f3f3f] text-[#9ca3af] rounded hover:bg-[#4f4f4f] text-sm">Export CSV</button>
                   </div>
-                  <div className="overflow-auto" style= maxHeight: 'calc(100vh - 500px)', minHeight: '300px' >
+                  <div className="overflow-auto" style={ { maxHeight: 'calc(100vh - 500px)', minHeight: '300px' }  }>
+                    
                     <table className="w-full">
                       <thead className="bg-[#1a1a1a] sticky top-0">
                         <tr>
@@ -170,7 +171,7 @@ export default function VMLFitmentPage() {
                     <h3 className="text-lg font-semibold text-[#f5f5f5]">Products Without FitRef</h3>
                     <button onClick={() => exportCSV(productsNoFitRef, 'products-no-fitref.csv')} className="px-3 py-1 bg-[#3f3f3f] text-[#9ca3af] rounded hover:bg-[#4f4f4f] text-sm">Export CSV</button>
                   </div>
-                  <div className="overflow-auto" style= maxHeight: 'calc(100vh - 500px)', minHeight: '300px' >
+                  <div className="overflow-auto" style={ { maxHeight: 'calc(100vh - 500px)', minHeight: '300px' }  }>
                     <table className="w-full">
                       <thead className="bg-[#1a1a1a] sticky top-0">
                         <tr>
@@ -201,7 +202,7 @@ export default function VMLFitmentPage() {
                     <h3 className="text-lg font-semibold text-[#f5f5f5]">VML Incomplete by Ktype</h3>
                     <button onClick={() => exportCSV(vmlIncomplete, 'vml-incomplete.csv')} className="px-3 py-1 bg-[#3f3f3f] text-[#9ca3af] rounded hover:bg-[#4f4f4f] text-sm">Export CSV</button>
                   </div>
-                  <div className="overflow-auto" style= maxHeight: 'calc(100vh - 500px)', minHeight: '300px' >
+                  <div className="overflow-auto" style={ { maxHeight: 'calc(100vh - 500px)', minHeight: '300px' }  }>
                     <table className="w-full">
                       <thead className="bg-[#1a1a1a] sticky top-0">
                         <tr>
