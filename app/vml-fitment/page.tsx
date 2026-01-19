@@ -186,8 +186,8 @@ export default function VMLFitmentPage() {
                           <tr key={i} className="border-t border-[#3f3f3f] hover:bg-[#3a3a3a]">
                             <td className="p-3 text-[#a78bfa] font-mono text-sm">{row.SKU}</td>
                             <td className="p-3 text-[#f5f5f5]">{row.Title}</td>
-                            <td className="p-3 text-[#f5f5f5]">{row.BrandName}</td>
-                            <td className="p-3 text-[#f5f5f5]">{row.CategoryName}</td>
+<td className="p-3 text-[#f5f5f5]">{row.Brand}</td>
+<td className="p-3 text-[#f5f5f5]">{row.Category}</td>
                           </tr>
                         ))}
                       </tbody>
