@@ -78,10 +78,11 @@ export default function VMLFitmentPage() {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
-          <div>
-            <h1 className="text-3xl font-bold text-[#a78bfa]">VML & Fitment Dashboard</h1>
-            <p className="text-[#9ca3af]">Track VML completion and fitment coverage</p>
-          </div>
+ <div>
+  <a href="/" className="text-[#9ca3af] hover:text-[#a78bfa] text-sm mb-2 inline-block">&larr; Back to Home</a>
+  <h1 className="text-3xl font-bold text-[#a78bfa]">VML & Fitment Dashboard</h1>
+  <p className="text-[#9ca3af]">Track VML completion and fitment coverage</p>
+</div>
           <button
             onClick={fetchData}
             className="px-4 py-2 bg-[#a78bfa] text-black font-semibold rounded-lg hover:bg-[#c4b5fd] transition-colors"
