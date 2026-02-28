@@ -56,7 +56,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 2000);
+    const timeout = setTimeout(() => controller.abort(), 4000);
     fetch(N8N_LOCAL_BASE, { mode: 'no-cors', signal: controller.signal })
       .then(() => setFormUrl(N8N_LOCAL_FORM))
       .catch(() => setFormUrl(N8N_TAILSCALE_FORM))
