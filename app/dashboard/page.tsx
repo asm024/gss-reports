@@ -1,12 +1,15 @@
 'use client';
+import { useState, useEffect } from 'react';
 
-const N8N_FORM_URL = 'N8N_FORM_URL_HERE';
-const POWER_APPS_URL = 'POWER_APPS_URL_HERE';
+const N8N_LOCAL_BASE = 'http://192.168.1.67:5678';
+const N8N_LOCAL_FORM = 'http://192.168.1.67:5678/form/7d467356-1d6d-4ab7-ba50-7a64324324d8';
+const N8N_TAILSCALE_FORM = 'http://100.103.88.20:5678/form/7d467356-1d6d-4ab7-ba50-7a64324324d8';
+const POWER_APPS_URL = 'https://apps.powerapps.com/play/e/d382cd7d-c3c6-e159-b362-550f357cf9c0/a/a82eeffe-ce6a-4ee9-b82b-e70e6afde695?tenantId=167c4e48-4c87-491c-a38e-d1a94f6cbafc&source=curatedApps&sourcetime=1770542287365';
 
 const reports = [
   { title: 'Brand Stock', desc: 'SKU count and QOH by brand', href: '/brand-stock', accent: '#f5c518' },
   { title: 'Dead Stock', desc: 'Items unsold for 3+ years', href: '/dead-stock', accent: '#ef4444' },
-  { title: 'Dead Stock — Not on eBay', desc: 'Not yet listed for clearance', href: '/dead-stock-unlisted', accent: '#f97316' },
+  { title: 'Dead Stock - Not on eBay', desc: 'Not yet listed for clearance', href: '/dead-stock-unlisted', accent: '#f97316' },
   { title: 'Overstocked', desc: 'Items exceeding max stock level', href: '/overstocked', accent: '#a78bfa' },
   { title: 'No Category', desc: 'In-stock products with no category', href: '/no-category', accent: '#6b7280' },
   { title: 'TBA Brand', desc: 'Products needing brand assignment', href: '/tba-brand', accent: '#6b7280' },
@@ -49,6 +52,17 @@ const s = {
 };
 
 export default function Dashboard() {
+  const [formUrl, setFormUrl] = useState('');
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 2000);
+    fetch(N8N_LOCAL_BASE, { mode: 'no-cors', signal: controller.signal })
+      .then(() => setFormUrl(N8N_LOCAL_FORM))
+      .catch(() => setFormUrl(N8N_TAILSCALE_FORM))
+      .finally(() => clearTimeout(timeout));
+  }, []);
+
   return (
     <div style={s.page}>
       <div style={s.header}>
@@ -76,12 +90,12 @@ export default function Dashboard() {
               <div style={s.formTitle}>Product Import</div>
               <div style={s.formDesc}>Add SKUs to Product Content Review</div>
             </div>
-            <iframe src={N8N_FORM_URL} style={s.iframe} title="Product Import Form" />
+            <iframe src={formUrl} style={s.iframe} title="Product Import Form" />
           </div>
           <div style={s.powerCard}>
             <div style={s.cardTitle}>GSS Master App</div>
             <div style={s.powerDesc}>Power Apps — opens in new tab</div>
-            <a href={https://apps.powerapps.com/play/e/d382cd7d-c3c6-e159-b362-550f357cf9c0/a/a82eeffe-ce6a-4ee9-b82b-e70e6afde695?tenantId=167c4e48-4c87-491c-a38e-d1a94f6cbafc&source=curatedApps&sourcetime=1770542287365} target="_blank" rel="noopener noreferrer" style={s.btn}>
+            <a href={POWER_APPS_URL} target="_blank" rel="noopener noreferrer" style={s.btn}>
               Open in Power Apps →
             </a>
           </div>
