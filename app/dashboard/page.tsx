@@ -81,7 +81,7 @@ export default function Dashboard() {
           <div style={s.powerCard}>
             <div style={s.cardTitle}>GSS Master App</div>
             <div style={s.powerDesc}>Power Apps — opens in new tab</div>
-            <a href={POWER_APPS_URL} target="_blank" rel="noopener noreferrer" style={s.btn}>
+            <a href={https://apps.powerapps.com/play/e/d382cd7d-c3c6-e159-b362-550f357cf9c0/a/a82eeffe-ce6a-4ee9-b82b-e70e6afde695?tenantId=167c4e48-4c87-491c-a38e-d1a94f6cbafc&source=curatedApps&sourcetime=1770542287365} target="_blank" rel="noopener noreferrer" style={s.btn}>
               Open in Power Apps →
             </a>
           </div>
